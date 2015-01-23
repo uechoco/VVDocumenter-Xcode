@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *indent;
 @property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *beforeDescription;
 @property (nonatomic, strong) NSMutableArray *arguments;
 @property (nonatomic, assign) BOOL hasReturn;
 

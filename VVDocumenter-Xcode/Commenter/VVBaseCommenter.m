@@ -24,6 +24,7 @@
     if (self) {
         _indent = indent;
         _code = code;
+        _beforeDescription = @"";
         _arguments = [NSMutableArray array];
         _space = [[VVDocumenterSetting defaultSetting] spacesString];
         _forSwift = NO;
@@ -43,7 +44,7 @@
 -(NSString *) startComment
 {
     NSString *descriptionTag =
-    [[VVDocumenterSetting defaultSetting] briefDescription] && !self.forSwift ? @"@brief  " : @"";
+    [[VVDocumenterSetting defaultSetting] briefDescription] && !self.forSwift ? @"@brief " : @"";
 
     NSString *authorInfo = @"";
 
@@ -72,11 +73,11 @@
     }
     
     if ([[VVDocumenterSetting defaultSetting] useHeaderDoc]) {
-        return [NSString stringWithFormat:@"%@/*!\n%@%@%@<#Description#>\n", self.indent, authorInfo, self.prefixString, descriptionTag];
+        return [NSString stringWithFormat:@"%@/*!\n%@%@%@%@<#Description#>\n", self.indent, authorInfo, self.beforeDescription, self.prefixString, descriptionTag];
     } else if ([[VVDocumenterSetting defaultSetting] prefixWithSlashes]) {
-        return [NSString stringWithFormat:@"%@%@%@<#Description#>\n", self.prefixString, authorInfo, descriptionTag];
+        return [NSString stringWithFormat:@"%@%@%@%@<#Description#>\n", self.prefixString, authorInfo, self.beforeDescription, descriptionTag];
     } else {
-        return [NSString stringWithFormat:@"%@/**\n%@%@%@<#Description#>\n", self.indent, authorInfo, self.prefixString, descriptionTag];
+        return [NSString stringWithFormat:@"%@/**\n%@%@%@%@<#Description#>\n", self.indent, authorInfo, self.beforeDescription, self.prefixString, descriptionTag];
     }
 }
 
