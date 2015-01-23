@@ -10,4 +10,16 @@
 
 @implementation VVStructCommenter
 
+-(void) preprocess
+{
+    self.beforeDescription = @"@struct <#struct#>\n";
+}
+
+-(NSString *) document
+{
+    [self preprocess];
+    
+    return [super documentForC];
+}
+
 @end
